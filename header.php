@@ -176,7 +176,7 @@
 									<li><a href="blog-details.html">Blog Details</a></li>
 								</ul>
 							</li>
-							<li class="nav-dashboard"><a href="dashboard.php">Student Dashboard</a>
+							<li class="nav-dashboard"><a href="dashboard/index.php">Student Dashboard</a>
 							</li>
 						</ul>
 						<div class="nav-social-link">

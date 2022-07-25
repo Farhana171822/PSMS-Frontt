@@ -1,9 +1,47 @@
+<?php 
+require_once('config.php');
+session_start();
+
+if(isset($_POST['st_login_btn'])){
+	$st_username = $_POST['st_username'];
+	$st_password = $_POST['st_password'];
+
+
+	if(empty($st_username)){
+		$error = "Mobile or Email is required!";
+	}
+	else if(empty($st_password)){
+		$error = "Password is required!";
+	}
+	else{
+		$st_password = SHA1($st_password);
+
+		$stCount = $pdo->prepare("SELECT id,email,mobile FROM students WHERE (email=? OR mobile=?) AND password=?");
+		$stCount->execute(array($st_username,$st_username,$st_password));
+		$loginCount = $stCount->rowCount();
+		echo $loginCount;
+
+		if ($loginCount == true) {
+			$stData = $stCount->fetchAll(PDO::FETCH_ASSOC);
+			$_SESSION['st_loggedin'] = $stData; //st_loggedin mane student log in hoye ache r ei khane student er sob data pabo
+			header('location:dashboard/index.php'); //log in howar pore frontt a dashboard er index.php ta connect kre dibe
+		}
+		else{
+			$error = "Failed!";
+		}
+	}
+
+}
+
+if(isset($_SESSION['st_loggedin'])){
+		header('location:dashboard/index.php');
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
-
 	<!-- META ============================================= -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
