@@ -1,5 +1,4 @@
 <?php 
-
 $host = "localhost";
 $db_name = "psms";
 $user = "root";
@@ -14,13 +13,22 @@ catch(PDOException $m){
     echo "Connection failed: " . $m->getMessage();
 }
 
-//count any column from insert.php
+
+
+// Count any Column Value from Students Table
 function stRowCount($col,$val){
     global $pdo;
     $stm=$pdo->prepare("SELECT $col FROM students WHERE $col=?");
     $stm->execute(array($val));
-    $count = $stm->rowcount();
-    echo "$count";
+    $count = $stm->rowCount();
+    return $count;
 }
 
-?>
+//  GET Student Data
+function Student($col,$id){
+    global $pdo;
+    $stm=$pdo->prepare("SELECT $col FROM students WHERE id=?");
+    $stm->execute(array($id));
+    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0][$col];
+}

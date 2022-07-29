@@ -16,15 +16,27 @@ if(isset($_POST['st_login_btn'])){
 	else{
 		$st_password = SHA1($st_password);
 
+		//Findout login user
 		$stCount = $pdo->prepare("SELECT id,email,mobile FROM students WHERE (email=? OR mobile=?) AND password=?");
 		$stCount->execute(array($st_username,$st_username,$st_password));
 		$loginCount = $stCount->rowCount();
-		echo $loginCount;
+		//echo $loginCount;
 
-		if ($loginCount == true) {
+		if($loginCount == 1){
 			$stData = $stCount->fetchAll(PDO::FETCH_ASSOC);
 			$_SESSION['st_loggedin'] = $stData; //st_loggedin mane student log in hoye ache r ei khane student er sob data pabo
-			header('location:dashboard/index.php'); //log in howar pore frontt a dashboard er index.php ta connect kre dibe
+
+			// Get Verification Status
+			$is_email_verified = Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']);
+			$is_mobile_verified = Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+
+			if($is_email_verified == 1 AND $is_mobile_verified == 1){
+				header('location:dashboard/index.php');
+			}
+			else{
+				header('location:verify.php');
+			}
+
 		}
 		else{
 			$error = "Failed!";
@@ -34,8 +46,17 @@ if(isset($_POST['st_login_btn'])){
 }
 
 if(isset($_SESSION['st_loggedin'])){
+	$is_email_verified = Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']);
+	$is_mobile_verified = Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+	
+	if($is_email_verified == 1 AND $is_mobile_verified == 1){
 		header('location:dashboard/index.php');
 	}
+	else{
+		header('location:verify.php');
+	}
+	 
+}
 
 ?>
 

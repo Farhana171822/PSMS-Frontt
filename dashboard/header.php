@@ -2,8 +2,11 @@
 require_once('../config.php');
 session_start();
 
-if(!isset($_SESSION['st_loggedin'])){
-	header('location:../login.php'); //dashboard thke ber hoye login.php te asbe jdi student log in kora na thake..student log in na kora obdi dashboard page a enter krte dibe nah
+$email_status =  Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']); 
+$mobile_status =  Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+
+if(!isset($_SESSION['st_loggedin']) OR $email_status != 1 OR $mobile_status != 1){
+	header('location:../logout.php'); //dashboard thke ber hoye login.php te asbe jdi student log in kora na thake..student log in na kora obdi dashboard page a enter krte dibe nah
 }
 
 ?>
