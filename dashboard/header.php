@@ -1,13 +1,17 @@
 <?php
-require_once('../config.php');
-session_start();
+	require_once('../config.php');
+	session_start();
 
-$email_status =  Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']); 
-$mobile_status =  Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+	$email_status = Student('is_email_varified',$_SESSION['st_loggedin'][0]['id']);
+	$email_status = Student('is_email_varified',$_SESSION['st_loggedin'][0]['id']);
 
-if(!isset($_SESSION['st_loggedin']) OR $email_status != 1 OR $mobile_status != 1){
-	header('location:../logout.php'); //dashboard thke ber hoye login.php te asbe jdi student log in kora na thake..student log in na kora obdi dashboard page a enter krte dibe nah
-}
+
+	if(!isset($_SESSION['st_loggedin'])){
+		header('location:logout.php'); //dashboard thke ber hoye login.php te asbe jdi student log in kora na thake..student log in na kora obdi dashboard page a enter krte dibe nah
+	}
+
+	$photo = Student('photo',$_SESSION['st_loggedin'][0]['id']);
+	//echo $photo;
 
 ?>
 
@@ -24,49 +28,50 @@ if(!isset($_SESSION['st_loggedin']) OR $email_status != 1 OR $mobile_status != 1
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 	<meta name="robots" content="" />
-	
+
 	<!-- DESCRIPTION -->
 	<meta name="description" content="PSMS - Student Dashboard" />
-	
+
 	<!-- OG -->
 	<meta property="og:title" content="PSMS - Student Dashboard" />
 	<meta property="og:description" content="PSMS - Student Dashboard" />
 	<meta property="og:image" content="" />
 	<meta name="format-detection" content="telephone=no">
-	
+
 	<!-- FAVICONS ICON ============================================= -->
 	<link rel="icon" href="../error-404.html" type="image/x-icon" />
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
-	
+
 	<!-- PAGE TITLE HERE ============================================= -->
 	<title>PSMS - Student Dashboard </title>
-	
+
 	<!-- MOBILE SPECIFIC ============================================= -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
 	<!--[if lt IE 9]>
 	<script src="assets/js/html5shiv.min.js"></script>
 	<script src="assets/js/respond.min.js"></script>
 	<![endif]-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
 	
 	<!-- All PLUGINS CSS ============================================= -->
 	<link rel="stylesheet" type="text/css" href="assets/css/assets.css">
 	<link rel="stylesheet" type="text/css" href="assets/vendors/calendar/fullcalendar.css">
-	
+
 	<!-- TYPOGRAPHY ============================================= -->
 	<link rel="stylesheet" type="text/css" href="assets/css/typography.css">
-	
+
 	<!-- SHORTCODES ============================================= -->
 	<link rel="stylesheet" type="text/css" href="assets/css/shortcodes/shortcodes.css">
-	
+
 	<!-- STYLESHEETS ============================================= -->
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
 	<link class="skin" rel="stylesheet" type="text/css" href="assets/css/color/color-1.css">
-	
+
 </head>
 <body class="ttr-opened-sidebar ttr-pinned-sidebar">
-	
+
 	<!-- header start -->
 	<header class="ttr-header">
 		<div class="ttr-header-wrapper">
@@ -185,12 +190,21 @@ if(!isset($_SESSION['st_loggedin']) OR $email_status != 1 OR $mobile_status != 1
 						</div>
 					</li>
 					<li>
-						<a href="#" class="ttr-material-button ttr-submenu-toggle"><span class="ttr-user-avatar"><img alt="" src="assets/images/testimonials/pic3.jpg" width="32" height="32"></span></a>
+						<a href="#" class="ttr-material-button ttr-submenu-toggle"><span class="ttr-user-avatar">
+
+							<?php if(photo != null) :?>
+								<img style="object-fit:cover;height:100%;width:100%;" src="<?php echo $photo?>" width="32" height="32">
+
+								<!-- pic set kora na thakle by default ja thkbe setai nibe -->
+								<?php else : ?>
+								<img alt="" src="assets/images/testimonials/pic3.jpg" width="32" height="32">
+							<?php endif;?>
+						</span></a>
+
 						<div class="ttr-header-submenu">
 							<ul>
-								<li><a href="user-profile.html">My profile</a></li>
-								<li><a href="list-view-calendar.html">Activity</a></li>
-								<li><a href="mailbox.html">Messages</a></li>
+								<li><a href="profile.php">profile</a></li>
+								<li><a href="change-password.php">Change Password</a></li>
 								<li><a href="logout.php">Logout</a></li>
 							</ul>
 						</div>
@@ -324,26 +338,30 @@ if(!isset($_SESSION['st_loggedin']) OR $email_status != 1 OR $mobile_status != 1
 		                	<span class="ttr-label">Add listing</span>
 		                </a>
 		            </li>
-					<li>
-						<a href="#" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-user"></i></span>
-		                	<span class="ttr-label">My Profile</span>
-		                	<span class="ttr-arrow-icon"><i class="fa fa-angle-down"></i></span>
-		                </a>
-		                <ul>
-		                	<li>
-		                		<a href="user-profile.html" class="ttr-material-button"><span class="ttr-label">User Profile</span></a>
-		                	</li>
-		                	<li>
-		                		<a href="teacher-profile.html" class="ttr-material-button"><span class="ttr-label">Teacher Profile</span></a>
-		                	</li>
-		                </ul>
-		            </li>
+					
 		            <li class="ttr-seperate"></li>
+					<li>
+						<a href="profile.php" class="ttr-material-button">
+							<span class="ttr-icon"><i class="far fa-id-card"></i></span>
+		                	<span class="ttr-label">Profile</span>
+		                </a>
+		            </li>
+					<li>
+						<a href="change-password.php" class="ttr-material-button">
+							<span class="ttr-icon"><i class="fas fa-key"></i></span>
+		                	<span class="ttr-label">Change Password</span>
+		                </a>
+		            </li>
+					<li>
+						<a href="logout.php" class="ttr-material-button">
+							<span class="ttr-icon"><i class="fas fa-sign-out-alt"></i></span>
+		                	<span class="ttr-label">Log out</span>
+		                </a>
+		            </li>
 				</ul>
 				<!-- sidebar menu end -->
 			</nav>
 			<!-- sidebar menu end -->
 		</div>
 	</div>
-	<!-- Left sidebar menu end -->
+		<!-- Left sidebar menu end -->

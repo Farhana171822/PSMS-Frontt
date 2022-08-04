@@ -63,7 +63,7 @@ if(isset($_POST['st_email_verify_btn'])){
 		$error = "Email code does't Match!";
 	}
 	else{
-		$stm = $pdo->prepare("UPDATE students SET email_code=?,is_email_verified=? WHERE id=?");
+		$stm = $pdo->prepare("UPDATE students SET email_code=?,is_email_varified=? WHERE id=?");
 		$stm->execute(array(null,1,$user_id)); 
 
 		unset($_SESSION['email_code_send']);
@@ -100,7 +100,7 @@ if(isset($_POST['st_mobile_verify_btn'])){
 		$error = "Mobile code does't Match!";
 	}
 	else{
-		$stm = $pdo->prepare("UPDATE students SET mobile_code=?,is_mobile_verified=? WHERE id=?");
+		$stm = $pdo->prepare("UPDATE students SET mobile_code=?,is_mobile_varified=? WHERE id=?");
 		$stm->execute(array(null,1,$user_id)); 
 
 		unset($_SESSION['mobile_code_send']);
@@ -186,8 +186,8 @@ if(isset($_POST['st_mobile_verify_btn'])){
 					</div>
 					<?php endif;?>
 					<?php 
-						$email_status =  Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']); 
-						$mobile_status =  Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']); 
+						$email_status =  Student('is_email_varified',$_SESSION['st_loggedin'][0]['id']); 
+						$mobile_status =  Student('is_mobile_varified',$_SESSION['st_loggedin'][0]['id']); 
 					
 
 						if(isset($_SESSION['st_loggedin']) AND $email_status == 1 AND $mobile_status == 1){

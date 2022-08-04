@@ -13,8 +13,6 @@ catch(PDOException $m){
     echo "Connection failed: " . $m->getMessage();
 }
 
-
-
 // Count any Column Value from Students Table
 function stRowCount($col,$val){
     global $pdo;
@@ -32,3 +30,5 @@ function Student($col,$id){
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $result[0][$col];
 }
+
+

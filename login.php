@@ -27,10 +27,10 @@ if(isset($_POST['st_login_btn'])){
 			$_SESSION['st_loggedin'] = $stData; //st_loggedin mane student log in hoye ache r ei khane student er sob data pabo
 
 			// Get Verification Status
-			$is_email_verified = Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']);
-			$is_mobile_verified = Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+			$is_email_varified = Student('is_email_varified',$_SESSION['st_loggedin'][0]['id']);
+			$is_mobile_varified = Student('is_mobile_varified',$_SESSION['st_loggedin'][0]['id']);
 
-			if($is_email_verified == 1 AND $is_mobile_verified == 1){
+			if($is_email_varified == 1 AND $is_mobile_varified == 1){
 				header('location:dashboard/index.php');
 			}
 			else{
@@ -46,10 +46,10 @@ if(isset($_POST['st_login_btn'])){
 }
 
 if(isset($_SESSION['st_loggedin'])){
-	$is_email_verified = Student('is_email_verified',$_SESSION['st_loggedin'][0]['id']);
-	$is_mobile_verified = Student('is_mobile_verified',$_SESSION['st_loggedin'][0]['id']);
+	$is_email_varified = Student('is_email_varified',$_SESSION['st_loggedin'][0]['id']);
+	$is_mobile_varified = Student('is_mobile_varified',$_SESSION['st_loggedin'][0]['id']);
 	
-	if($is_email_verified == 1 AND $is_mobile_verified == 1){
+	if($is_email_varified == 1 AND $is_mobile_varified == 1){
 		header('location:dashboard/index.php');
 	}
 	else{
