@@ -282,12 +282,23 @@
 		                </a>
 		            </li>
 					<li>
-						<a href="courses.html" class="ttr-material-button">
+						<a href="class.php" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-book"></i></span>
-		                	<span class="ttr-label">Courses</span>
+		                	<span class="ttr-label">Class</span>
 		                </a>
 		            </li>
 					<li>
+						<a href="class-routine.php" class="ttr-material-button">
+							<span class="ttr-icon"><i class="ti-book"></i></span>
+		                	<span class="ttr-label">Class Routine</span>
+		                </a>
+		            </li><li>
+						<a href="class.php" class="ttr-material-button">
+							<span class="ttr-icon"><i class="ti-book"></i></span>
+		                	<span class="ttr-label">Class Attendence</span>
+		                </a>
+		            </li>
+					<!-- <li>
 						<a href="#" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-email"></i></span>
 		                	<span class="ttr-label">Mailbox</span>
@@ -304,8 +315,8 @@
 		                		<a href="mailbox-read.html" class="ttr-material-button"><span class="ttr-label">Mail Read</span></a>
 		                	</li>
 		                </ul>
-		            </li>
-					<li>
+		            </li> -->
+					<!-- <li>
 						<a href="#" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-calendar"></i></span>
 		                	<span class="ttr-label">Calendar</span>
@@ -320,8 +331,8 @@
 		                	</li>
 		                </ul>
 		            </li>
-					<li>
-						<a href="bookmark.html" class="ttr-material-button">
+					<li> -->
+						<!-- <a href="bookmark.html" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-bookmark-alt"></i></span>
 		                	<span class="ttr-label">Bookmarks</span>
 		                </a>
@@ -331,13 +342,7 @@
 							<span class="ttr-icon"><i class="ti-comments"></i></span>
 		                	<span class="ttr-label">Review</span>
 		                </a>
-		            </li>
-					<li>
-						<a href="add-listing.html" class="ttr-material-button">
-							<span class="ttr-icon"><i class="ti-layout-accordion-list"></i></span>
-		                	<span class="ttr-label">Add listing</span>
-		                </a>
-		            </li>
+		            </li> -->
 					
 		            <li class="ttr-seperate"></li>
 					<li>

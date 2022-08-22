@@ -13,7 +13,7 @@ catch(PDOException $m){
     echo "Connection failed: " . $m->getMessage();
 }
 
-// Count any Column Value from Students Table
+// count column from students stable
 function stRowCount($col,$val){
     global $pdo;
     $stm=$pdo->prepare("SELECT $col FROM students WHERE $col=?");
@@ -31,4 +31,11 @@ function Student($col,$id){
     return $result[0][$col];
 }
 
-
+// Get Subject Name
+function getSubjectName($id){
+    global $pdo;
+    $stm=$pdo->prepare("SELECT name,code FROM subject WHERE id=?");
+    $stm->execute(array($id));
+    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['name']."-".$result[0]['code'];
+}

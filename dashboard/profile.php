@@ -101,7 +101,7 @@
                             <tr>
                                 <td><b>Profile Photo:</b></td>
                                 <td>
-                                    <?php if(photo != null) :?>
+                                    <?php if($photo != null) :?>
                                         <img style="height:100%;width:auto;" src="<?php echo $photo?>" width="32" height="32">
 
                                         <!-- pic set kora na thakle by default ja thkbe setai nibe -->
